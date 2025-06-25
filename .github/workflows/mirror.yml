@@ -3,7 +3,7 @@ name: Mirror to Hssn19/quick-visit-checkin
 on:
   push:
     branches:
-      - main
+      - main  # change this if your default branch is different
 
 jobs:
   mirror:
@@ -13,7 +13,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Mirror push to first repo
+      - name: Mirror push to Hssn19 repo
         env:
           FIRST_GITHUB_PAT: ${{ secrets.FIRST_GITHUB_PAT }}
         run: |
