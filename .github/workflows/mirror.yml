@@ -10,17 +10,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Git
+      - name: Set up Git identity
         run: |
           git config --global user.email "action@github.com"
-          git config --global user.name "GitHub Action"
+          git config --global user.name "GitHub Actions"
 
-      - name: Push to mirror repo
-        env:
-          TOKEN: ${{ secrets.FIRST_GITHUB_PAT }}
+      - name: Add and push to mirror
         run: |
-          git remote add mirror https://x-access-token:${TOKEN}@github.com/Hssn19/quick-visit-checkin.git
+          git remote add mirror "https://x-access-token:${{ secrets.FIRST_GITHUB_PAT }}@github.com/Hssn19/quick-visit-checkin.git"
           git push mirror --force
