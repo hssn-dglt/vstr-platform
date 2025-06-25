@@ -1,0 +1,19 @@
+name: Mirror to Hssn19/quick-visit-checkin
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Mirror push to first repo
+        run: |
+          git remote add mirror https://x-access-token:${{ secrets.FIRST_GITHUB_PAT }}@github.com/Hssn19/quick-visit-checkin.git
+          git push --mirror mirror
