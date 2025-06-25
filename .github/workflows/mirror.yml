@@ -3,7 +3,7 @@ name: Mirror to Hssn19/quick-visit-checkin
 on:
   push:
     branches:
-      - main  # change this if your default branch is different
+      - main
 
 jobs:
   mirror:
@@ -13,9 +13,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Mirror push to Hssn19 repo
-        env:
-          FIRST_GITHUB_PAT: ${{ secrets.FIRST_GITHUB_PAT }}
+      - name: Set up Git
         run: |
-          git remote add mirror "https://x-access-token:${FIRST_GITHUB_PAT}@github.com/Hssn19/quick-visit-checkin.git"
-          git push --mirror mirror
+          git config --global user.email "action@github.com"
+          git config --global user.name "GitHub Action"
+
+      - name: Push to mirror repo
+        env:
+          TOKEN: ${{ secrets.FIRST_GITHUB_PAT }}
+        run: |
+          git remote add mirror https://x-access-token:${TOKEN}@github.com/Hssn19/quick-visit-checkin.git
+          git push mirror --force
