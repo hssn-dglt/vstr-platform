@@ -18,10 +18,9 @@ jobs:
           git config --global user.email "action@github.com"
           git config --global user.name "GitHub Actions"
 
-      - name: Add and push to mirror
+      - name: Push `main` to mirror repo
         env:
           PAT: ${{ secrets.FIRST_GITHUB_PAT }}
         run: |
-          REMOTE_URL="https://x-access-token:${PAT}@github.com/Hssn19/quick-visit-checkin.git"
-          git remote add mirror "$REMOTE_URL"
-          git push mirror --force
+          git remote add mirror "https://x-access-token:${PAT}@github.com/Hssn19/quick-visit-checkin.git"
+          git push mirror main:main --force
